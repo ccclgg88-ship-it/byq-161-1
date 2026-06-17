@@ -77,12 +77,17 @@ export default function LegendTimeline({ records }: Props) {
                       </div>
                     </div>
 
-                    <p className="text-[11px] font-serif text-silk-200/40 mt-2 flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); setActiveId(active ? null : rec.id); }}
+                      className="text-[11px] font-serif text-silk-200/40 mt-2 flex items-center gap-1
+                                 hover:text-silk-200/70 transition-colors cursor-pointer"
+                    >
                       {active ? '点击收起原文' : '点击展开文献原文'}
                       <span className="inline-block">
                         {active ? '▲' : '▼'}
                       </span>
-                    </p>
+                    </button>
                   </div>
                 </div>
               </div>

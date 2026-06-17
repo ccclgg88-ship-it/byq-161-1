@@ -35,7 +35,12 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
   const scroll = (dir: -1 | 1) => {
     const el = scrollRef.current
     if (!el) return
-    el.scrollBy({ left: dir * 320, behavior: 'smooth' })
+    const isVertical = window.matchMedia('(min-width: 1280px)').matches
+    if (isVertical) {
+      el.scrollBy({ top: dir * 320, behavior: 'smooth' })
+    } else {
+      el.scrollBy({ left: dir * 320, behavior: 'smooth' })
+    }
   }
 
   const go = (id: string) => {
@@ -44,7 +49,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
 
   return (
     <aside className="w-full xl:fixed xl:right-0 xl:top-1/2 xl:-translate-y-1/2 xl:w-80 z-20 mt-16 xl:mt-0">
-      <div className="relative xl:rounded-l-sm overflow-hidden bg-ink-800/70 backdrop-blur-md
+      <div className="relative xl:rounded-l-sm overflow-visible bg-ink-800/70 backdrop-blur-md
                       border border-silk-200/10 xl:border-r-0
                       shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
         <div className="px-5 py-4 border-b border-silk-200/10 flex items-center justify-between">
@@ -55,7 +60,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
           <span className="text-[10px] font-serif text-silk-200/40">{filtered.length} 条</span>
         </div>
 
-        <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
+        <div className="hidden xl:block absolute -left-4 top-4 z-10">
           <button
             onClick={() => scroll(-1)}
             className="w-8 h-8 rounded-full bg-ink-900 border border-silk-200/20
@@ -63,7 +68,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
                        flex items-center justify-center backdrop-blur-sm transition-all
                        hover:scale-110"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 rotate-90" />
           </button>
         </div>
 
@@ -75,7 +80,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
             <button
               key={r.relatedId}
               onClick={() => go(r.yokai.id)}
-              className="group shrink-0 xl:shrink w-[220px] xl:w-full text-left rounded-sm
+              className="group shrink-0 xl:shrink-0 w-[220px] xl:w-full text-left rounded-sm
                          border border-silk-200/10 bg-ink-900/50 overflow-hidden
                          hover:border-bronze-500/40 transition-all hover:-translate-y-0.5"
             >
@@ -110,7 +115,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
           ))}
         </div>
 
-        <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+        <div className="hidden xl:block absolute -left-4 bottom-4 z-10">
           <button
             onClick={() => scroll(1)}
             className="w-8 h-8 rounded-full bg-ink-900 border border-silk-200/20
@@ -118,7 +123,7 @@ export default function RelatedSidebar({ currentId, relations }: Props) {
                        flex items-center justify-center backdrop-blur-sm transition-all
                        hover:scale-110"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 rotate-90" />
           </button>
         </div>
 

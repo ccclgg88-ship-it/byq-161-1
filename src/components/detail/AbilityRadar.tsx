@@ -68,7 +68,7 @@ export default function AbilityRadar({ stats }: Props) {
       <SectionHeader icon={<Shield className="w-5 h-5" />} title="能力特质"
                      subtitle="五维量化，悬停可察释义" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(380px,1fr)_1fr] gap-10 lg:gap-12 items-start">
         <div className="relative mx-auto w-full max-w-[380px] aspect-square">
           <div className="absolute inset-0 animate-ink-spread opacity-10
                           rounded-full bg-gradient-radial from-vermilion-500/40 to-transparent"
